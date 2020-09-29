@@ -1,9 +1,9 @@
-
 import time
 import numpy as np
 import emcee
 from multiprocessing import Pool
 from multiprocessing import cpu_count
+
 
 ncpu = cpu_count()
 print("{0} CPUs".format(ncpu))
@@ -31,7 +31,7 @@ print("Serial took {0:.1f} seconds".format(serial_time))
 
 
 print("----------------------------TESTING PARALLEL----------------------------")
-with Pool() as pool:
+with Pool(128) as pool:
     sampler = emcee.EnsembleSampler(nwalkers, ndim, log_prob, pool=pool)
     start = time.time()
     sampler.run_mcmc(initial, nsteps, progress=True)
@@ -39,5 +39,3 @@ with Pool() as pool:
     multi_time = end - start
     print("Multiprocessing took {0:.1f} seconds".format(multi_time))
     print("{0:.1f} times faster than serial".format(serial_time / multi_time))
-
-    

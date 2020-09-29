@@ -5,6 +5,7 @@
 #SBATCH --reservation=test
 #SBATCH --out=./emcee.txt
 
+export OMP_NUM_THREADS=1
 
 module load anaconda3
 conda activate testemcee

@@ -31,7 +31,7 @@ print("Serial took {0:.1f} seconds".format(serial_time))
 
 
 print("----------------------------TESTING PARALLEL----------------------------")
-with Pool(128) as pool:
+with Pool() as pool:
     sampler = emcee.EnsembleSampler(nwalkers, ndim, log_prob, pool=pool)
     start = time.time()
     sampler.run_mcmc(initial, nsteps, progress=True)
